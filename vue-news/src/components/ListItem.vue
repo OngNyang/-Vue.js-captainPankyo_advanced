@@ -4,6 +4,7 @@
             <li v-for="item in listItems" :key="item.id" class="post">
                 <div class="points">
                     {{ item.points || 0 }}
+                    hello
                 </div>
                 <div>
                     <p class='news-title'>
