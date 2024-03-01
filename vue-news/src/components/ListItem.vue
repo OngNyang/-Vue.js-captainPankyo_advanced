@@ -4,19 +4,30 @@
             <li v-for="item in listItems" :key="item.id" class="post">
                 <div class="points">
                     {{ item.points || 0 }}
-                    hello
                 </div>
+                <!-- 기타 정보의 영역 -->
                 <div>
+                    <!-- 타이틀 영역 -->
                     <p class='news-title'>
-                        <a v-bind:href="item.url">
-                            {{ item.title }}
-                        </a>
+                        <template v-if="item.domain">
+                            <a v-bind:href="item.url">
+                                {{ item.title }}
+                            </a>
+                        </template>
+                        <template v-else>
+                            <router-link v-bind:to="`item/${item.id}`">
+                                {{ item.title }}
+                            </router-link>
+                        </template>
                     </p>
                     <small class="lint-text">
                         {{ item.time_ago }} by
-                        <router-link v-bind:to="`/user/${item.user}`" class="link-text">
+                        <router-link v-if="item.user" v-bind:to="`/user/${item.user}`" class="link-text">
                             {{ item.title }}
                         </router-link>
+                        <a :href="item.url" v-else>
+                            {{ item.domain }}
+                        </a>
                     </small>
                 </div>
             </li>
